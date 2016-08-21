@@ -1,10 +1,12 @@
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.shortcuts import render_to_response, render
+from django.contrib.auth.decorators import login_required
 
 from .models import application
 
 @csrf_exempt
+@login_required
 def index(request):
 	resp = {}
 	
@@ -30,9 +32,10 @@ def index(request):
 	
 	# save as annotated so no one else can try to edit this person
 	currentApplicant.annotated = True
-	currentApplicant.save() # TODO: uncomment this in production!
+	# currentApplicant.save() # TODO: uncomment this in production!
 
-	resp['annotator'] = annotator
+	if annotator is not None:
+		resp['annotator'] = annotator
 	resp['fullName'] = currentApplicant.fullName
 	resp['email'] = currentApplicant.email
 	resp['uscId'] = currentApplicant.uscId
