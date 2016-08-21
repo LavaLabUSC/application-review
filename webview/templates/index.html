@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div id="masthead">  
+  <div class="container">
+      <div class="row">
+        <div class="col-md-7">
+          <h1>LavaLab Application Review
+            <p class="lead">Fall 2016</p>
+          </h1>
+        </div>
+      </div> 
+  </div><!--/container-->
+</div><!--/masthead-->
+
+<!--main-->
+<div class="container">
+	<div class="row">
+      <!--left-->
+      <div class="col-md-3" id="leftCol">
+        <ul class="nav nav-stacked" id="sidebar">
+          <li><a href="#sec0">basic info</a></li>
+          <li><a href="#sec1">short answers</a></li>
+          <li><a href="#sec2">long answers</a></li>
+          <li><a href="#sec3">rating</a></li>
+<!--           <li><a href="#sec3">other</a></li>
+          <li><a href="#sec4">final</a></li> -->
+        </ul>
+      </div><!--/left-->
+      
+      <!--right-->
+      <div class="col-md-9">
+        <h1 id="sec0">{{ fullName }}</h1>
+        <div class="row">
+          <div class="col-md-6">
+		        <p>Email: {{ email }}</p>
+		        <p>USCID: {{ uscId }}</p>
+		        <p>Major: {{ major }}</p>
+		        <p>Minor: {{ minor }}</p>
+		        <p>Grad Year: {{ gradYear }}</p>
+		        <p>Available for our Tuesday meetings: {{ available }}</p>
+		    </div>
+          <div class="col-md-6">
+		        <p><a href="{{ resume }}">Resume</a></p>
+		        <p><a href="{{ portfolio }}">Portfolio / Github</a></p>
+		        <p>{{ joke }}</p>
+		    </div>
+		</div>
+        <hr>        
+        <h2 id="sec1">Short Answers</h2>
+        <div class="row">
+          <div class="col-md-6">
+	        <p>
+	            {{ roles }}.
+	            <br/>
+	            <br/>
+	            <strong>Any other roles?</strong>
+	            <br/>
+	            {{ otherRole }}
+	            <br/>
+	            <br/>
+	            <strong>Desired Outcome of LavaLab</strong>
+	            <br/>
+	            {{ desiredOutcome }}
+	            <br/>
+	            <br/>
+	            <strong>Contribution to team:</strong>
+	            <br/>
+	            {{ contribution }}
+	            <br/>
+	            <br/>
+	            <strong>Recent Projects:</strong>
+	            <br/>
+	            {{ recentProj }}
+	            <br/>
+	            <br/>
+	            <strong>Other Organizations:</strong>
+	            <br/>
+	            {{ otherOrg }}
+	        </p>
+	      </div>
+          <div class="col-md-6">
+	        <p>
+	            <br/>
+	            <br/>
+	            <strong>Software Development Tools:</strong>
+	            <br/>
+	            {{ devToolsSoft }}
+	            <br/>
+	            <br/>
+	            <strong>Hardware Development Tools:</strong>
+	            <br/>
+	            {{ devToolsHard }}
+	            <br/>
+	            <br/>
+	            <strong>Design Tools:</strong>
+	            <br/>
+	            {{ designTools }}
+	            <br/>
+	            <br/>
+	            <strong>Other Tools:</strong>
+	            <br/>
+	            {{ otherTools }}
+	        </p>
+	      </div>
+        </div>
+        <hr>        
+        <h2 id="sec2">Long Answers</h2>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="panel panel-default">
+              <div class="panel-heading"><h3>What's a daily problem?</h3></div>
+              <div class="panel-body">{{ dailyProb }}
+              </div>
+            </div>
+          </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+              <div class="panel-heading"><h3>What excites you in tech?</h3></div>
+              <div class="panel-body">{{ dailyProb }}
+              </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+              <div class="panel-heading"><h3>What do you look forward to?</h3></div>
+              <div class="panel-body">{{ whatWork }}
+              </div>
+            </div>
+        </div>
+	    </div>
+        
+        <hr>
+        <h2 id="sec3">Rating</h2>
+        <p>
+          
+        </p>
+        <div class="row">
+          <div class="col-md-4"><img src="//placehold.it/300x300" class="img-responsive"></div>
+          <div class="col-md-4"><img src="//placehold.it/300x300" class="img-responsive"></div>
+          <div class="col-md-4"><img src="//placehold.it/300x300" class="img-responsive"></div>
+        </div>
+        
+        <hr>
+        
+        </div><!--/right-->
+  	</div><!--/row-->
+</div><!--/container-->
+
+{% endblock %}
