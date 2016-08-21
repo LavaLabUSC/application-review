@@ -17,8 +17,8 @@ def index(request):
 	currentApplicant.save()
 
 	# saving annotated applicant
-		if not annotator in request.session:
-			request.session['annotator'] = request.POST.get('offset')
-		resp['annotator'] = request.session['annotator']
+		# if not annotator in request.session:
+		# 	request.session['annotator'] = request.POST.get('offset')
+		# resp['annotator'] = request.session['annotator']
 
 	return render(request,'index.html',resp)
