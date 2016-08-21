@@ -23,8 +23,7 @@
           <li><a href="#sec1">short answers</a></li>
           <li><a href="#sec2">long answers</a></li>
           <li><a href="#sec3">rating</a></li>
-<!--           <li><a href="#sec3">other</a></li>
-          <li><a href="#sec4">final</a></li> -->
+          <li><a href="#sec4">submit</a></li>
         </ul>
       </div><!--/left-->
       
@@ -135,6 +134,7 @@
         <h1 id="sec3">Rating / Review</h1>
         <div class="row">
           <div class="col-md-12">
+		        <form action="/review/" method="post">
 		        <p>
 		        	<strong>
 		        		Rate the following 1-5.
@@ -199,16 +199,40 @@
 		        	<textarea class="form-control" id="final" name="final"></textarea>
 		        	<br/>
 		        	<strong>Your Decision</strong>
-		        	    <select id="finalDec" name="finalDec" class="form-control">
-							<option selected disabled hidden style='display: none' value=''></option>
-							<option value="SY">Strong Yes</option>
-							<option value="Y">Yes</option>
-							<option value="M">Meh</option>
-							<option value="N">No</option>
-							<option value="F">Da Fuq</option>
-						</select>
+	        	    <select id="finalDec" name="finalDec" class="form-control">
+						<option selected disabled hidden style='display: none' value=''></option>
+						<option value="SY">Strong Yes</option>
+						<option value="Y">Yes</option>
+						<option value="M">Meh</option>
+						<option value="N">No</option>
+						<option value="F">Da Fuq</option>
+					</select>
+					<br/>
+					<strong>Your Name</strong>
+					<input id="annotator" name="annotator" type="text" placeholder="drake" class="form-control input-md" maxlength="10" value="{{ annotator }}">
+					<br/>
+					<br/>
+					<hr>
 		    </div>
 		</div>
+        <div class="col-md-9">
+	        <h1 id="sec4">Submit</h1>
+	        <div class="row">
+				<div class="col-md-12">
+					<br/>
+					<input type="hidden" value="{{ email }}" id="applicantEmail" name="applicantEmail">
+					<input type="submit" class="btn btn-secondary"></input>
+					<br/>
+					<br/>
+					<p>
+						Pressing Save will save these notes and take you to the next application. We can only edit again in the backend, so be sure you're ready!
+					</p>
+					<br/>
+					<br/>
+				</div>
+			</div>
+		</div>
+		</form>
         
         </div><!--/right-->
   	</div><!--/row-->

@@ -8,19 +8,31 @@ from .models import application
 def index(request):
 	resp = {}
 	
+	# saving annotated applicant if exists
+	annotator = request.POST.get('annotator')
+	if annotator:
+		applicantEmail = request.POST.get('applicantEmail')
+		subtApplicants = application.objects.filter(email=applicantEmail)
+		subtApplicant = subtApplicants[0]
+		subtApplicant.dedicationRating = request.POST.get('determined')
+		subtApplicant.resourcefulRating = request.POST.get('resourceful')
+		subtApplicant.experienceRating = request.POST.get('experienced')
+		subtApplicant.imaginationRating = request.POST.get('imaginative')
+		subtApplicant.naughtyRating = request.POST.get('naughty')
+		subtApplicant.notes = request.POST.get('final')
+		subtApplicant.final = request.POST.get('finalDec')
+		subtApplicant.annotator = annotator
+		subtApplicant.save()
+
 	# get a new applicant
 	newApplicants = application.objects.filter(annotated=False)
 	currentApplicant = newApplicants[0]
 	
 	# save as annotated so no one else can try to edit this person
 	currentApplicant.annotated = True
-	# currentApplicant.save() # TODO: uncomment this in production!
+	currentApplicant.save() # TODO: uncomment this in production!
 
-	# saving annotated applicant
-		# if not annotator in request.session:
-		# 	request.session['annotator'] = request.POST.get('offset')
-		# resp['annotator'] = request.session['annotator']
-
+	resp['annotator'] = annotator
 	resp['fullName'] = currentApplicant.fullName
 	resp['email'] = currentApplicant.email
 	resp['uscId'] = currentApplicant.uscId
