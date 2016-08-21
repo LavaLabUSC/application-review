@@ -131,17 +131,84 @@
 	    </div>
         
         <hr>
-        <h2 id="sec3">Rating</h2>
-        <p>
-          
-        </p>
+        <div class="col-md-9">
+        <h1 id="sec3">Rating / Review</h1>
         <div class="row">
-          <div class="col-md-4"><img src="//placehold.it/300x300" class="img-responsive"></div>
-          <div class="col-md-4"><img src="//placehold.it/300x300" class="img-responsive"></div>
-          <div class="col-md-4"><img src="//placehold.it/300x300" class="img-responsive"></div>
-        </div>
-        
-        <hr>
+          <div class="col-md-12">
+		        <p>
+		        	<strong>
+		        		Rate the following 1-5.
+		        	</strong>
+		        </p>
+		        <p>
+		        	A rating of 5 indicates that the applicant completely exceeds the written statement. A rating of 1 indicates that it is completely false.
+		        </p>
+		        <hr>
+		        <p>
+		        	This applicant is relentlessly determined and would not get demoralized easily. They'd be willing to do the nitty gritty to get their shit done.
+		        	<br/>
+		        	<div class="row">
+			        	<div class="col-md-2">
+				        	<input id="determined" name="determined" type="text" placeholder="3" class="form-control input-md" maxlength="1">
+				        </div>
+			       </div>
+		        </p>
+		        <hr>
+		        <p>
+		        	This applicant is resourceful and will execute despite ambiguity. They will work with others and suprise teammates with <i>perceived</i> expertise because of their resourcefulness.
+		           	<br/>
+		        	<div class="row">
+			        	<div class="col-md-2">
+				        	<input id="resourceful" name="resourceful" type="text" placeholder="3" class="form-control input-md" maxlength="1">
+				        </div>
+			       </div>
+		        </p>
+		        <hr>
+		        <p>
+		        	{{ fullName }} is incredibly experienced and would be able to produce amazing things.
+		           	<br/>
+		        	<div class="row">
+			        	<div class="col-md-2">
+				        	<input id="experienced" name="experienced" type="text" placeholder="3" class="form-control input-md" maxlength="1">
+				        </div>
+			       </div>
+		        </p>
+		        <hr>
+		        <p>
+		        	They're imaginative and can think outside the box. Not just "uber for x" or "tinder for y."
+		           	<br/>
+		        	<div class="row">
+			        	<div class="col-md-2">
+				        	<input id="imaginative" name="imaginative" type="text" placeholder="3" class="form-control input-md" maxlength="1">
+				        </div>
+			       </div>
+		        </p>
+		        <hr>
+		        <p>
+		        	The applicant is <strong>naughty</strong>. They'll find loopholes and hack the system. This goes hand-in-hand with resourcefulness. They'll see a company without internship positions, apply as a consultant, and convince the recruiting team to hire them full time. They'll teach a class at USC as a sophomore. They know their value and know how to use it.
+		           	<br/>
+		        	<div class="row">
+			        	<div class="col-md-2">
+				        	<input id="naughty" name="naughty" type="text" placeholder="3" class="form-control input-md" maxlength="1">
+				        </div>
+			       </div>
+		        </p>
+		        <hr>
+		        <p>
+		        	<strong>Final Notes</strong>
+		        	<textarea class="form-control" id="final" name="final"></textarea>
+		        	<br/>
+		        	<strong>Your Decision</strong>
+		        	    <select id="finalDec" name="finalDec" class="form-control">
+							<option selected disabled hidden style='display: none' value=''></option>
+							<option value="SY">Strong Yes</option>
+							<option value="Y">Yes</option>
+							<option value="M">Meh</option>
+							<option value="N">No</option>
+							<option value="F">Da Fuq</option>
+						</select>
+		    </div>
+		</div>
         
         </div><!--/right-->
   	</div><!--/row-->

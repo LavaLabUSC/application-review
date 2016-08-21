@@ -5,6 +5,8 @@ lets us upload typeform responses from our application. then, our team can all u
 
 full plans later to integrate application directly.
 
+hastily-developed because of recruitment timeline (pretty meh code overall).
+
 screenshot:
 
 ![screenshot](http://usclavalab.org/assets/images/app-review-screengrab.png)
