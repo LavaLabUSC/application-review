@@ -9,4 +9,4 @@ hastily-developed because of recruitment timeline (pretty meh code overall).
 
 screenshot:
 
-![screenshot](http://usclavalab.org/assets/images/app-review-screengrab.png)
+![screenshot](http://usclavalab.org/assets/images/screencapture-127-0-0-1-8000-review-1471828100148.png)
