@@ -13,6 +13,11 @@ def index(request):
 	
 	# saving annotated applicant if exists
 	annotator = request.POST.get('annotator')
+	other = request.GET.get('other')
+	developer = request.GET.get('developer')
+	designer = request.GET.get('designer')
+	product = request.GET.get('product')
+
 	if annotator:
 		applicantEmail = request.POST.get('applicantEmail')
 		subtApplicants = application.objects.filter(email=applicantEmail)
@@ -52,12 +57,31 @@ def index(request):
 		subtApplicant.save()
 
 	# get a new applicant
-	newApplicants = application.objects.filter(annotated=False)
+	if developer is not None:
+		newApplicants = application.objects.filter(annotated=False,developer=True)
+	elif designer is not None:
+		newApplicants = application.objects.filter(annotated=False,designer=True)
+	elif product is not None:
+		newApplicants = application.objects.filter(annotated=False,product=True)
+	elif other is not None:
+		newApplicants = application.objects.filter(annotated=False,other=True)
+	else:
+		newApplicants = application.objects.filter(annotated=False)
 	currentApplicant = newApplicants[0]
 	
 	# save as annotated so no one else can try to edit this person
 	currentApplicant.annotated = True
-	currentApplicant.save() # TODO: uncomment this in production!
+	# currentApplicant.save() # TODO: uncomment this in production!
+
+	resp['roleView'] = "Role: "
+	if currentApplicant.developer:
+		resp['roleView'] += "Developer, "
+	if currentApplicant.designer:
+		resp['roleView'] += "Designer, "
+	if currentApplicant.product:
+		resp['roleView'] += "Product, "
+	if currentApplicant.other:
+		resp['roleView'] += "Other, "
 
 	if annotator is not None:
 		resp['annotator'] = annotator
@@ -68,7 +92,10 @@ def index(request):
 	resp['minor'] = currentApplicant.minor
 	resp['gradYear'] = currentApplicant.gradYear
 	resp['available'] = currentApplicant.available
-	resp['roles'] = currentApplicant.roles
+	resp['developer'] = currentApplicant.developer
+	resp['designer'] = currentApplicant.designer
+	resp['product'] = currentApplicant.product
+	resp['other'] = currentApplicant.other
 	resp['otherRole'] = currentApplicant.otherRole
 	resp['desiredOutcome'] = currentApplicant.desiredOutcome
 	resp['contribution'] = currentApplicant.contribution
