@@ -2,8 +2,12 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.shortcuts import render_to_response, render
 from django.contrib.auth.decorators import login_required
-import csv
 
+# csv handling
+import csv
+# from djqscsv import render_to_csv_response
+
+# models
 from .models import application
 
 @csrf_exempt
@@ -12,6 +16,7 @@ def index(request):
 	resp = {}
 	
 	# saving annotated applicant if exists
+	emailLookup = request.GET.get('email')
 	annotator = request.POST.get('annotator')
 	other = request.GET.get('other')
 	developer = request.GET.get('developer')
@@ -59,6 +64,8 @@ def index(request):
 	# get a new applicant
 	if developer is not None:
 		newApplicants = application.objects.filter(annotated=False,developer=True)
+	elif emailLookup is not None:
+		newApplicants = application.objects.filter(email=emailLookup)
 	elif designer is not None:
 		newApplicants = application.objects.filter(annotated=False,designer=True)
 	elif product is not None:
@@ -75,13 +82,13 @@ def index(request):
 
 	resp['roleView'] = "Role: "
 	if currentApplicant.developer:
-		resp['roleView'] += "Developer, "
+		resp['roleView'] += "Developer "
 	if currentApplicant.designer:
-		resp['roleView'] += "Designer, "
+		resp['roleView'] += "Designer "
 	if currentApplicant.product:
-		resp['roleView'] += "Product, "
+		resp['roleView'] += "Product "
 	if currentApplicant.other:
-		resp['roleView'] += "Other, "
+		resp['roleView'] += "Other "
 
 	if annotator is not None:
 		resp['annotator'] = annotator
@@ -112,10 +119,48 @@ def index(request):
 	resp['otherOrg'] = currentApplicant.otherOrg
 	resp['referral'] = currentApplicant.referral
 	resp['joke'] = currentApplicant.joke
+	resp['dedicationRating'] = currentApplicant.dedicationRating
+	resp['resourcefulRating'] = currentApplicant.resourcefulRating
+	resp['experienceRating'] = currentApplicant.experienceRating
+	resp['imaginationRating'] = currentApplicant.imaginationRating
+	resp['naughtyRating'] = currentApplicant.naughtyRating
+	resp['notes'] = currentApplicant.notes
+	resp['final'] = currentApplicant.final
 
 	return render(request,'index.html',resp)
 
+@csrf_exempt
+@login_required
+def all(request):
+	resp = {}
+	# for getting and displaying all applicants by type
+	
+	resp['applicants'] = []
 
+	newApplicants = application.objects.all()
+	
+	for each in newApplicants:
+		singleApplicant = {}
+		singleApplicant['fullName'] = each.fullName
+		singleApplicant['email'] = each.email
+		singleApplicant['major'] = each.major
+		singleApplicant['gradYear'] = each.gradYear
+		singleApplicant['roleView'] = ""
+		if each.developer:
+			singleApplicant['roleView'] += "Developer "
+		if each.designer:
+			singleApplicant['roleView'] += "Designer "
+		if each.product:
+			singleApplicant['roleView'] += "Product "
+		if each.other:
+			singleApplicant['roleView'] += "Other "
+		resp['applicants'].append(singleApplicant)
+		print(singleApplicant['fullName'])
+
+	return render(request,'all.html',resp)
+
+@csrf_exempt
+@login_required
 def uploadCSV(request):
 	
 	# application.objects.all().delete()
@@ -130,3 +175,10 @@ def uploadCSV(request):
 		print(each[1])
 
 	return HttpResponse("Completed.")
+
+
+# @csrf_exempt
+# @login_required
+# def downloadCSV(request):
+# 	allApplications = application.objects.all().values('fullName', 'email', 'uscId', 'major', 'minor', 'gradYear', 'available', 'developer', 'designer', 'product', 'other', 'otherRole', 'desiredOutcome', 'contribution', 'recentProj', 'dailyProb', 'excitingTech', 'devToolsSoft', 'devToolsHard', 'designTools', 'otherTools', 'resume', 'portfolio', 'whatWork', 'otherOrg', 'referral', 'joke', 'annotated', 'dedicationRating', 'resourcefulRating', 'experienceRating', 'imaginationRating', 'naughtyRating', 'notes', 'annotator', 'final')
+# 	return render_to_csv_response(allApplications)

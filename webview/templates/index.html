@@ -147,7 +147,7 @@
 		        	<br/>
 		        	<div class="row">
 			        	<div class="col-md-2">
-				        	<input id="determined" name="determined" type="text" placeholder="3" class="form-control input-md" maxlength="1">
+				        	<input id="determined" value="{{ dedicationRating }}"  name="determined" type="text" placeholder="3" class="form-control input-md" maxlength="1">
 				        </div>
 			       </div>
 		        </p>
@@ -157,7 +157,7 @@
 		           	<br/>
 		        	<div class="row">
 			        	<div class="col-md-2">
-				        	<input id="resourceful" name="resourceful" type="text" placeholder="3" class="form-control input-md" maxlength="1">
+				        	<input id="resourceful" value="{{ resourcefulRating }}"  name="resourceful" type="text" placeholder="3" class="form-control input-md" maxlength="1">
 				        </div>
 			       </div>
 		        </p>
@@ -167,7 +167,7 @@
 		           	<br/>
 		        	<div class="row">
 			        	<div class="col-md-2">
-				        	<input id="experienced" name="experienced" type="text" placeholder="3" class="form-control input-md" maxlength="1">
+				        	<input id="experienced" value="{{ experienceRating }}"  name="experienced" type="text" placeholder="3" class="form-control input-md" maxlength="1">
 				        </div>
 			       </div>
 		        </p>
@@ -177,7 +177,7 @@
 		           	<br/>
 		        	<div class="row">
 			        	<div class="col-md-2">
-				        	<input id="imaginative" name="imaginative" type="text" placeholder="3" class="form-control input-md" maxlength="1">
+				        	<input id="imaginative" value="{{ imaginationRating }}"  name="imaginative" type="text" placeholder="3" class="form-control input-md" maxlength="1">
 				        </div>
 			       </div>
 		        </p>
@@ -187,15 +187,16 @@
 		           	<br/>
 		        	<div class="row">
 			        	<div class="col-md-2">
-				        	<input id="naughty" name="naughty" type="text" placeholder="3" class="form-control input-md" maxlength="1">
+				        	<input id="naughty" value="{{ naughtyRating }}" name="naughty" type="text" placeholder="3" class="form-control input-md" maxlength="1">
 				        </div>
 			       </div>
 		        </p>
 		        <hr>
 		        <p>
 		        	<strong>Final Notes</strong>
-		        	<textarea class="form-control" id="final" name="final"></textarea>
+		        	<textarea class="form-control" id="final" name="final">{{ notes }}</textarea>
 		        	<br/>
+		        	{% if not final %}
 		        	<strong>Your Decision</strong>
 	        	    <select id="finalDec" name="finalDec" class="form-control">
 						<option selected disabled hidden style='display: none' value=''></option>
@@ -205,9 +206,13 @@
 						<option value="N">No</option>
 						<option value="F">Da Fuq</option>
 					</select>
+					{% else %}
+					<strong>Previously decided as: {{ final }}</strong>
+					<br/>
+					{% endif %}
 					<br/>
 					<strong>Your Name</strong>
-					<input id="annotator" name="annotator" type="text" placeholder="drake" class="form-control input-md" maxlength="10" value="{{ annotator }}">
+					<input id="annotator" name="annotator" type="text" class="form-control input-md" maxlength="10" value="{{ annotator }}">
 					<br/>
 					<br/>
 					<hr>

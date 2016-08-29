@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div id="masthead">  
+  <div class="container">
+      <div class="row">
+        <div class="col-md-7">
+          <h1>LavaLab Application Review
+            <p class="lead">Fall 2016</p>
+          </h1>
+        </div>
+      </div> 
+  </div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+	        <h1 id="sec0">All Applicants</h1>
+	        <hr>
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>
+							Full Name
+						</th>
+						<th>
+							Email
+						</th>
+						<th>
+							Major
+						</th>
+						<th>
+							Grad Year
+						</th>
+						<th>
+							Role
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for each in applicants %}
+					<tr>
+						<td>
+							<a href="/review?email={{ each.email }}">{{ each.fullName }}</a>
+						</td>
+						<td>
+							{{ each.email }}
+						</td>
+						<td>
+							{{ each.major }}
+						</td>
+						<td>
+							{{ each.gradYear }}
+						</td>
+						<td>
+							{{ each.roleView }}
+						</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+	    </div>
+  	</div>
+</div>
+
+{% endblock %}
