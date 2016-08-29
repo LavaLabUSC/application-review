@@ -6,7 +6,7 @@ class application(models.Model):
 	uscId					= models.IntegerField(default=0,null=True)
 	major			 		= models.CharField(max_length=400,null=True)
 	minor			 		= models.CharField(max_length=400,null=True)
-	gradYear				= models.IntegerField(default=0,null=True)
+	gradYear				= models.CharField(max_length=400,null=True,default=0)
 	available				= models.BooleanField(default=False)
 	developer				= models.BooleanField(default=False)
 	designer				= models.BooleanField(default=False)

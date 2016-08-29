@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.shortcuts import render_to_response, render
@@ -165,14 +166,91 @@ def uploadCSV(request):
 	
 	# application.objects.all().delete()
 
+	# takes keyed JSON from convertcsv dot com
 	reader = [
 	]
 	
 	for each in reader:
-		roles = each[8] + "," + each[9] + "," + each[10] + "," + each[11]
-		singleApplicant = application(fullName=each[1],email=each[2],uscId=each[3],major=each[4],minor=each[5],gradYear=each[6],available=each[7],roles=roles,otherRole=each[12],desiredOutcome=each[13],contribution=each[14],recentProj=each[15],dailyProb=each[16],excitingTech=each[17],devToolsSoft=each[18],devToolsHard=each[19],designTools=each[20],otherTools=each[21],resume=each[22],portfolio=each[23],whatWork=each[24],otherOrg=each[25],referral=each[26],joke=each[27])
+		singleApplicant = application()
+
+		singleApplicant.fullName = each[1]
+		singleApplicant.email = each[2]
+		singleApplicant.uscId = each[3]
+		singleApplicant.major = each[4]
+		singleApplicant.minor = each[5]
+		singleApplicant.gradYear = each[6]
+		
+		if each[7]:
+			singleApplicant.available = True
+		else:
+			singleApplicant.available = False
+		
+		if each[8]:
+			singleApplicant.developer = True
+		else:
+			singleApplicant.developer = False
+
+		if each[9]:
+			singleApplicant.designer = True
+		else:
+			singleApplicant.designer = False
+
+		if each[10]:
+			singleApplicant.product = True
+		else:
+			singleApplicant.product = False
+
+		if each[11]:
+			singleApplicant.other = True
+		else:
+			singleApplicant.other = False
+
+		singleApplicant.otherRole = each[12]
+		singleApplicant.desiredOutcome = each[13]
+		singleApplicant.contribution = each[14]
+		singleApplicant.recentProj = each[15]
+		singleApplicant.dailyProb = each[16]
+		singleApplicant.excitingTech = each[17]
+		singleApplicant.resume = each[40]
+		singleApplicant.portfolio = each[41]
+		singleApplicant.whatWork = each[42]
+		singleApplicant.otherOrg = each[43]
+		singleApplicant.joke = each[45]
+		singleApplicant.otherTools = each[39]
+
+		# cleaning columns 16-38
+		# software is column 18-26
+		start = 18
+		tools = []
+		for i in range (0,8):
+			if each[start]:
+				tools.append(each[start])
+				start = start + 1
+				print(tools)
+			singleApplicant.devToolsSoft = ', '.join(map(str, tools))
+
+		# hardware is column 27-31
+		start = 27
+		tools = []
+		for i in range (0,4):
+			if each[start]:
+				tools.append(each[start])
+				start = start + 1
+				print(tools)
+			singleApplicant.devToolsHard = ', '.join(map(str, tools))
+
+		# design is column 32-38
+		start = 32
+		tools = []
+		for i in range (0,6):
+			if each[start]:
+				tools.append(each[start])
+				start = start + 1
+				print(tools)
+			singleApplicant.designTools = ', '.join(map(str, tools))
+		
+		print(singleApplicant.fullName)
 		singleApplicant.save()
-		print(each[1])
 
 	return HttpResponse("Completed.")
 
